@@ -1,10 +1,10 @@
-# 🤖 Sistema RAG con Gemini Flash
+# Sistema RAG con Gemini Flash
 
 > **Retrieval-Augmented Generation** — Un sistema de preguntas y respuestas que utiliza tus propios documentos como base de conocimiento.
 
 ---
 
-## 📖 ¿Qué es RAG?
+## ¿Qué es RAG?
 
 **RAG (Retrieval-Augmented Generation)** es un patrón de arquitectura de IA que combina dos capacidades:
 
@@ -198,73 +198,51 @@ RAG/
 
 ---
 
-## 🚀 Guía de Uso
+---
 
-### Requisitos Previos
-- **Python 3.10+** instalado
-- Una **API Key de Google** (gratuita desde [Google AI Studio](https://aistudio.google.com/apikey))
+## Guía de Inicio Rápido
 
-### 1. Clonar/Descargar el Proyecto
+### 1. Requisitos
+- **Python 3.10+**
+- Una API Key de **Google AI Studio** ([Consíguela aquí](https://aistudio.google.com/app/apikey)).
+
+### 2. Instalación Manual (Si no usaste el `install_all.py` de la raíz)
 ```bash
-cd RAG
-```
-
-### 2. Crear Entorno Virtual e Instalar Dependencias
-```bash
+# Crear entorno virtual
 python -m venv venv
-.\venv\Scripts\activate          # En Windows
-# source venv/bin/activate       # En macOS/Linux
 
+# Activar entorno
+# Windows:
+.\venv\Scripts\activate
+# Mac/Linux:
+source venv/bin/activate
+
+# Instalar dependencias
 pip install -r requirements.txt
 ```
 
-### 3. Configurar la API Key
-Crea un archivo `.env` en la raíz del proyecto:
-```env
-GOOGLE_API_KEY=tu_api_key_aquí
+### 3. Configuración
+Crea un archivo `.env` (o renombra el `.env.example`) y añade tu clave:
+```text
+GOOGLE_API_KEY="TU_API_KEY_AQUÍ"
 ```
 
-### 4. Añadir tus Documentos
-Coloca archivos `.txt` en la carpeta `./docs/`. Puedes añadir cuantos quieras:
-```
-docs/
-├── mi_documento.txt
-├── apuntes_clase.txt
-└── notas_proyecto.txt
-```
+### 4. Preparar Documentos
+Coloca tus archivos `.txt` en la carpeta `./docs/`.
 
-> **Importante:** Si cambias los documentos, borra la carpeta `chroma_db/` para que se regeneren los embeddings:
-> ```bash
-> Remove-Item -Recurse -Force ./chroma_db   # Windows PowerShell
-> # rm -rf ./chroma_db                       # macOS/Linux
-> ```
-
-### 5. Ejecutar
+### 5. Ejecución
 ```bash
 python app.py
 ```
 
-### 6. Hacer Preguntas
-```
-🤔 Tu pregunta: ¿De qué iba el Proyecto Fénix?
-⏳ Buscando en los documentos y generando respuesta...
-
-🤖 Respuesta de Gemini:
-El Proyecto Fénix fue una iniciativa ultra-secreta de la agencia Horizon
-en el año 2045. Su objetivo era desarrollar un reactor de fusión fría
-portátil para proveer energía a colonias marcianas...
-```
-
-Escribe `salir`, `exit` o `quit` para terminar.
-
 ---
 
-## ⚙️ Parámetros Configurables
+## Parámetros Configurables
 
 Estos valores se pueden ajustar directamente en `app.py`:
 
 | Parámetro | Valor actual | Descripción | Línea |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | `chunk_size` | `1000` | Tamaño máximo de cada fragmento (en caracteres) | 45 |
 | `chunk_overlap` | `200` | Solapamiento entre chunks consecutivos | 45 |
 | `search_kwargs["k"]` | `3` | Número de fragmentos recuperados por pregunta | 58 |
@@ -280,7 +258,7 @@ Estos valores se pueden ajustar directamente en `app.py`:
 
 ---
 
-## 🧩 Dependencias
+## Dependencias
 
 ```txt
 langchain>=0.3.0              # Framework de orquestación (core vacío en v1.x)
@@ -293,7 +271,7 @@ chromadb>=0.5.15              # Base de datos vectorial local
 
 ---
 
-## ❓ Preguntas Frecuentes
+## Preguntas Frecuentes
 
 ### ¿Puedo usar otros tipos de archivos además de `.txt`?
 Sí, LangChain soporta PDF, Word, CSV, y muchos más. Solo necesitas cambiar el `loader_cls` y el `glob` en la línea 29. Por ejemplo para PDFs:

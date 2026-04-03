@@ -1,8 +1,46 @@
-# Arquitectura y Funcionamiento: Proyecto Simple MCP
+# Model Context Protocol (MCP) - Cliente y Servidor
 
-Esta guía detalla cómo está diseñado el sistema que acabas de ejecutar, las tecnologías empleadas y el flujo exacto bajo el capó.
+Este proyecto explora el **Model Context Protocol (MCP)**, un estándar abierto para conectar modelos de IA con datos y herramientas locales de forma segura.
 
 ---
+
+## Guía de Inicio Rápido
+
+### 1. Requisitos
+- **Python 3.10+**
+- Una API Key de **Google AI Studio** ([Consíguela aquí](https://aistudio.google.com/app/apikey)).
+
+### 2. Instalación Manual (Si no usaste el `install_all.py` de la raíz)
+```bash
+# Crear entorno virtual
+python -m venv .venv
+
+# Activar entorno
+# Windows:
+.\.venv\Scripts\activate
+# Mac/Linux:
+source .venv/bin/activate
+
+# Instalar dependencias
+pip install -r requirements.txt
+```
+
+### 3. Configuración
+Crea un archivo `.env` (o renombra el `.env.example`) y añade tu clave:
+```text
+GOOGLE_API_KEY="TU_API_KEY_AQUÍ"
+```
+
+### 4. Ejecución
+El proyecto consta de un servidor y un cliente que se comunican por `stdio`:
+```bash
+# El cliente levantará automáticamente el servidor
+python ai_client.py
+```
+
+---
+
+## Arquitectura y Funcionamiento
 
 ## 📚 1. Tecnologías y Librerías Empleadas
 

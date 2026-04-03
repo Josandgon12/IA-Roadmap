@@ -1,25 +1,61 @@
-# Local RAG con Ollama
+# IA Local - RAG con Ollama
 
-Este proyecto es una prueba de concepto (PoC) sencilla para demostrar cómo funciona el concepto de **RAG (Retrieval-Augmented Generation)** de forma completamente local, utilizando modelos de lenguaje de código abierto a través de **Ollama**.
+Este proyecto demuestra cómo implementar un sistema de **Retrieval-Augmented Generation (RAG)** que se ejecuta de forma 100% local y privada, sin enviar datos a la nube.
 
-## 🚀 Cómo funciona
+---
 
-El script `rag_local.py` simula un asistente de atención al cliente para una tienda ficticia llamada "AutoParts". El flujo de ejecución es el siguiente:
+## Guía de Inicio Rápido
 
-1.  **Definición del Contexto (La "Base de Datos"):** En lugar de conectarse a una base de datos vectorial o realizar búsquedas en tiempo real, el script define un bloque de texto duro (`contexto_privado`) con información específica del negocio (tiempos de devolución, horarios, stock). Este texto actúa como nuestra "fuente de conocimiento".
-2.  **Captura de la Pregunta:** Se define una pregunta del usuario simulando una consulta real sobre devoluciones fuera de horario y verificación de stock.
-3.  **Construcción del Prompt (Enriquecimiento):** Aquí ocurre la magia del RAG. El script toma la instrucción base (comportarse como un asistente de atención al cliente), le inyecta el `contexto_privado` (nuestra información) y le añade la `pregunta_usuario`. Se le da la instrucción estricta a la IA de responder *únicamente* basándose en ese contexto proporcionado.
-4.  **Inferencia Local (Ollama):** El prompt enriquecido se envía al modelo `llama3.2` que se está ejecutando localmente en tu máquina a través de la API local que expone Ollama.
-5.  **Respuesta:** El modelo analiza la pregunta en base al contexto dado, compila una respuesta coherente y la devuelve para ser impresa en la consola.
+### 1. Requisitos
+- **Python 3.10+**
+- **Ollama**: [Descargar e instalar Ollama](https://ollama.com/)
+- **Modelo Llama 3.2**: Ejecuta `ollama run llama3.2` en tu terminal para descargar el modelo.
 
-## 🛠️ Tecnologías Empleadas
+### 2. Instalación Manual (Si no usaste el `install_all.py` de la raíz)
+```bash
+# Crear entorno virtual
+python -m venv venv
 
-*   **Python:** El lenguaje de programación utilizado para orquestar la lógica.
-*   **Ollama:** Una herramienta que simplifica enormemente la ejecución de Large Language Models (LLMs) localmente en tu propio hardware (procesador o tarjeta gráfica).
-*   **Llama 3.2:** El modelo de lenguaje específico de IA (desarrollado por Meta) descargado y ejecutado vía Ollama. Considerado excelente para tareas de razonamiento local.
-*   **Librería `ollama` para Python:** El cliente oficial en Python usado para interactuar cómodamente con la API local que levanta Ollama en tu ordenador.
+# Activar entorno
+# Windows:
+.\venv\Scripts\activate
+# Mac/Linux:
+source venv/bin/activate
 
-## 🧠 Conceptos Clave
+# Instalar dependencias
+pip install -r requirements.txt
+```
+
+### 3. Ejecución
+```bash
+python rag_local.py
+```
+
+---
+
+## Cómo funciona
+
+El script utiliza **Ollama** para ejecutar el modelo `llama3.2` en tu propia CPU/GPU. El flujo es el siguiente:
+1.  Se define un **contexto privado** (simulando una base de conocimiento).
+2.  Se recibe la pregunta del usuario.
+3.  Se construye un **Prompt Enriquecido** que combina el contexto con la pregunta.
+4.  El modelo local genera una respuesta basada exclusivamente en la información provista.
+
+---
+
+## Tecnologías Utilizadas
+
+- **[Ollama](https://ollama.com/)**: Motor de ejecución de LLMs en local.
+- **Llama 3.2**: Modelo de lenguaje de Meta optimizado para eficiencia.
+- **Librería `ollama` (Python)**: Wrapper oficial para interactuar con el servidor de Ollama.
+
+---
+
+## Conceptos Clave
+
+- **RAG Local**: Privacidad total de los datos.
+- **Inferencia en CPU**: Ejecución sin necesidad de hardware de servidor.
+- **Prompt Engineering**: Técnicas para forzar al modelo a seguir el contexto.
 
 ### ¿Qué es RAG (Retrieval-Augmented Generation)?
 
